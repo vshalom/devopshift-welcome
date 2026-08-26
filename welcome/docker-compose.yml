@@ -34,8 +34,8 @@ services:
             - 'SLAVE_EXECUTORS=8'
 
 
-        # ports:
-        #     - "5005-5010:5005-5010"
+        ports:
+             - "5005-5010:5005-5010"
 
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock  # Expose the docker daemon in the container
