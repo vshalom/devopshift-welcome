@@ -28,9 +28,9 @@ pipeline {
                         fi
 
                         # Delete previously built virtualenv and create a new one
-                        rm -rf $PYENV_HOME
-                        virtualenv $PYENV_HOME
-                        source $PYENV_HOME/bin/activate
+                        rm -rf "$PYENV_HOME"
+                        virtualenv "$PYENV_HOME"
+                        source "$PYENV_HOME/bin/activate"
 
                         # Install required Python packages
                         pip install -r requirements.txt
@@ -46,7 +46,7 @@ pipeline {
                     script {
                         // Run Flask app within the virtual environment
                         sh '''#!/bin/bash
-                        source $PYENV_HOME/bin/activate
+                        source "$PYENV_HOME/bin/activate"
                         tasks=$(pgrep -f "flask run")
                         if [ -n "$tasks" ]; then
                             echo "Stopping existing Flask application..."
@@ -143,7 +143,7 @@ pipeline {
                 echo 'Archiving Flask application log...'
                 archiveArtifacts artifacts: 'flask_app.log', allowEmptyArchive: true
                 echo 'Cleaning up workspace...'
-                sh 'rm -rf $PYENV_HOME'
+                sh 'rm -rf "$PYENV_HOME"'
             }
         }
     }
